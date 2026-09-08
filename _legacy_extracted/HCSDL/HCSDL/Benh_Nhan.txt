@@ -1,0 +1,7 @@
+MaSo, __Dia_chi, __Ngay_Nhap_Vien
+BN01, TPHCM, 2022-01-02
+BN02, TPHCM, 2022-03-02
+BN03, BR-VT, 2022-06-03
+BN04, DongNai, 2022-03-28
+BN05, BinhThuan, 2022-01-04
+

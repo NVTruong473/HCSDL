@@ -1,0 +1,8 @@
+Khóa của bảng Customer:
+  ('CustomerID',)
+Khóa của bảng Order:
+  ('TotalAmount', 'OrderID')
+Khóa của bảng Product:
+  ('ProductID', 'ProductName', 'Price')
+Khóa của bảng OrderDetails:
+  ('ProductID', 'OrderID')

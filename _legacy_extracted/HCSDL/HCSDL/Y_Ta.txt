@@ -1,0 +1,6 @@
+MaNV, __MSCC, _TenKDT
+NV01,CC01, Khoa Ngoai
+NV02,CC02, Khoa Da Lieu
+NV03,CC03, Khoa Ung Buu
+NV04,CC04, Khoa Noi
+NV05,CC05, Khoa San

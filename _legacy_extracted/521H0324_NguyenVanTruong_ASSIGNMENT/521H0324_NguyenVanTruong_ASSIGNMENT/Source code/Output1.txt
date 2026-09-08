@@ -1,0 +1,4 @@
+[Sinh vien] (Masv, hoten) – [Hoc bong] (Mabong, tenbong): 1-1
+[Sinh vien] (Masv, hoten, MaLop: FK) – [Lop hoc] (MaLop, Tenlop): n – 1
+[Sinh vien] (Masv, hoten) – [Sinhvien_Monhoc] (Masv, hoten, Mamon: FK) – [Mon hoc] (Mamon, tenmon): n – n
+[Can Bo Cong nhan vien] (Mã số, Họ tên) – [Giang vien] (Mã số, Họ tên, Trình độ, chuyên ngành): 1-1
