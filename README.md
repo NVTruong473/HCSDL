@@ -6,6 +6,8 @@
 
 This repository is no longer organized as disconnected labs or ZIP submissions. The coursework has been anonymized and rebuilt as a LeetCode-style database track that a reviewer can browse, run, test, and audit. Personal student identifiers and submission-specific filenames are intentionally omitted.
 
+> CI validates the Python relational-theory tooling and the complete P001–P100 challenge catalog on every push.
+
 ## What this repo proves
 
 - Relational modeling: ERD, cardinality, subtype/supertype mapping, junction tables.
