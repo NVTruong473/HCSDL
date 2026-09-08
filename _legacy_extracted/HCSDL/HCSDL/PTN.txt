@@ -1,6 +1,0 @@
-Ten, __Dia_Diem
-A1, Khu A
-A2, Khu A
-B1, Khu B
-B2, Khu B
-DB, Khu C

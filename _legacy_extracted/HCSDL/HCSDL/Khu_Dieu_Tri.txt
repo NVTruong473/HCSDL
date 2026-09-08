@@ -1,7 +1,0 @@
-Ten, __Dia_Diem, _MaYT
-Khoa Ngoai, Khu A, NV01
-Khoa Da Lieu, Khu B, NV02
-Khoa Ung Buu, Khu A1, NV03
-Khoa Noi, Khu B2, NV04
-Khoa San, Khu C, NV05
-

@@ -1,0 +1,117 @@
+IF DB_ID(N'DatabaseLeetCode_BTL') IS NULL
+    EXEC(N'CREATE DATABASE DatabaseLeetCode_BTL');
+GO
+USE DatabaseLeetCode_BTL;
+GO
+
+DROP TABLE IF EXISTS dbo.KetQua;
+DROP TABLE IF EXISTS dbo.PhanCong;
+DROP TABLE IF EXISTS dbo.SinhVien;
+DROP TABLE IF EXISTS dbo.Lop;
+DROP TABLE IF EXISTS dbo.GiaoVien;
+DROP TABLE IF EXISTS dbo.MonHoc;
+DROP TABLE IF EXISTS dbo.QueQuan;
+DROP TABLE IF EXISTS dbo.DanToc;
+DROP TABLE IF EXISTS dbo.TonGiao;
+GO
+
+CREATE TABLE dbo.MonHoc (
+    MaMonHoc INT NOT NULL CONSTRAINT PK_MonHoc_BTL PRIMARY KEY,
+    TenMonHoc NVARCHAR(100) NOT NULL,
+    SoTietLyThuyet SMALLINT NOT NULL,
+    SoTietThucHanh SMALLINT NOT NULL,
+    CONSTRAINT CK_MonHoc_SoTiet CHECK (SoTietLyThuyet >= 0 AND SoTietThucHanh >= 0)
+);
+
+CREATE TABLE dbo.DanToc (
+    MaDanToc INT NOT NULL CONSTRAINT PK_DanToc PRIMARY KEY,
+    TenDanToc NVARCHAR(100) NOT NULL CONSTRAINT UQ_DanToc_Ten UNIQUE
+);
+
+CREATE TABLE dbo.TonGiao (
+    MaTonGiao INT NOT NULL CONSTRAINT PK_TonGiao PRIMARY KEY,
+    TenTonGiao NVARCHAR(100) NOT NULL CONSTRAINT UQ_TonGiao_Ten UNIQUE
+);
+
+CREATE TABLE dbo.QueQuan (
+    MaQueQuan INT NOT NULL CONSTRAINT PK_QueQuan PRIMARY KEY,
+    TenTinhThanhPho NVARCHAR(100) NOT NULL,
+    TenQuanHuyen NVARCHAR(100) NOT NULL,
+    TenPhuongXa NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE dbo.GiaoVien (
+    MaGiaoVien INT NOT NULL CONSTRAINT PK_GiaoVien PRIMARY KEY,
+    TenGiaoVien NVARCHAR(100) NOT NULL,
+    Phai BIT NOT NULL,
+    NgaySinh DATE NOT NULL,
+    SoDienThoai VARCHAR(15) NOT NULL CONSTRAINT UQ_GiaoVien_SDT UNIQUE,
+    DiaChi NVARCHAR(200) NULL,
+    Email VARCHAR(254) NOT NULL CONSTRAINT UQ_GiaoVien_Email UNIQUE,
+    MaQueQuan INT NOT NULL,
+    MaDanToc INT NOT NULL,
+    MaTonGiao INT NOT NULL,
+    CONSTRAINT FK_GiaoVien_QueQuan FOREIGN KEY (MaQueQuan) REFERENCES dbo.QueQuan(MaQueQuan),
+    CONSTRAINT FK_GiaoVien_DanToc FOREIGN KEY (MaDanToc) REFERENCES dbo.DanToc(MaDanToc),
+    CONSTRAINT FK_GiaoVien_TonGiao FOREIGN KEY (MaTonGiao) REFERENCES dbo.TonGiao(MaTonGiao)
+);
+
+CREATE TABLE dbo.Lop (
+    MaLop INT NOT NULL CONSTRAINT PK_Lop PRIMARY KEY,
+    TenLop NVARCHAR(100) NOT NULL,
+    MaNganhHoc NVARCHAR(100) NOT NULL,
+    MaGVCN INT NOT NULL,
+    CONSTRAINT FK_Lop_GiaoVien FOREIGN KEY (MaGVCN) REFERENCES dbo.GiaoVien(MaGiaoVien)
+);
+
+CREATE TABLE dbo.SinhVien (
+    MaSinhVien INT NOT NULL CONSTRAINT PK_SinhVien_BTL PRIMARY KEY,
+    HoSinhVien NVARCHAR(100) NOT NULL,
+    TenSinhVien NVARCHAR(100) NOT NULL,
+    MaLop INT NOT NULL,
+    Phai BIT NOT NULL,
+    NgaySinh DATE NOT NULL,
+    DiaChi NVARCHAR(200) NULL,
+    MaQueQuan INT NOT NULL,
+    MaDanToc INT NOT NULL,
+    MaTonGiao INT NOT NULL,
+    HocBong DECIMAL(12,2) NOT NULL CONSTRAINT DF_SinhVien_HocBong DEFAULT (0),
+    IsDeleted BIT NOT NULL CONSTRAINT DF_SinhVien_IsDeleted DEFAULT (0),
+    RowVer ROWVERSION,
+    CONSTRAINT CK_SinhVien_HocBong CHECK (HocBong >= 0),
+    CONSTRAINT FK_SinhVien_Lop FOREIGN KEY (MaLop) REFERENCES dbo.Lop(MaLop),
+    CONSTRAINT FK_SinhVien_QueQuan FOREIGN KEY (MaQueQuan) REFERENCES dbo.QueQuan(MaQueQuan),
+    CONSTRAINT FK_SinhVien_DanToc FOREIGN KEY (MaDanToc) REFERENCES dbo.DanToc(MaDanToc),
+    CONSTRAINT FK_SinhVien_TonGiao FOREIGN KEY (MaTonGiao) REFERENCES dbo.TonGiao(MaTonGiao)
+);
+
+CREATE TABLE dbo.PhanCong (
+    MaPhanCong INT NOT NULL CONSTRAINT PK_PhanCong PRIMARY KEY,
+    MaMonHoc INT NOT NULL,
+    MaGiaoVien INT NOT NULL,
+    MaLop INT NOT NULL,
+    HocKy TINYINT NOT NULL,
+    Nam SMALLINT NOT NULL,
+    NgayBatDau DATE NOT NULL,
+    NgayKetThuc DATE NOT NULL,
+    CONSTRAINT CK_PhanCong_HocKy CHECK (HocKy BETWEEN 1 AND 3),
+    CONSTRAINT CK_PhanCong_ThoiGian CHECK (NgayBatDau <= NgayKetThuc),
+    CONSTRAINT UQ_PhanCong UNIQUE (MaMonHoc, MaGiaoVien, MaLop, HocKy, Nam),
+    CONSTRAINT FK_PhanCong_MonHoc FOREIGN KEY (MaMonHoc) REFERENCES dbo.MonHoc(MaMonHoc),
+    CONSTRAINT FK_PhanCong_GiaoVien FOREIGN KEY (MaGiaoVien) REFERENCES dbo.GiaoVien(MaGiaoVien),
+    CONSTRAINT FK_PhanCong_Lop FOREIGN KEY (MaLop) REFERENCES dbo.Lop(MaLop)
+);
+
+CREATE TABLE dbo.KetQua (
+    MaPhanCong INT NOT NULL,
+    MaSinhVien INT NOT NULL,
+    LanThi TINYINT NOT NULL,
+    Diem DECIMAL(4,1) NOT NULL,
+    GhiChu NVARCHAR(200) NULL,
+    CONSTRAINT PK_KetQua_BTL PRIMARY KEY (MaPhanCong, MaSinhVien, LanThi),
+    CONSTRAINT CK_KetQua_LanThi CHECK (LanThi >= 1),
+    CONSTRAINT CK_KetQua_Diem_BTL CHECK (Diem BETWEEN 0 AND 10),
+    CONSTRAINT FK_KetQua_PhanCong FOREIGN KEY (MaPhanCong) REFERENCES dbo.PhanCong(MaPhanCong),
+    CONSTRAINT FK_KetQua_SinhVien_BTL FOREIGN KEY (MaSinhVien) REFERENCES dbo.SinhVien(MaSinhVien)
+);
+GO

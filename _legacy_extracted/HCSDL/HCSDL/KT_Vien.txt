@@ -1,6 +1,0 @@
-MaNV, __Ky_Nang
-NV01 ,Xet Nghiem
-NV02 ,Dieu Che
-NV03 ,Xet Nghiem
-NV04 ,Dieu che
-NV05 ,Xet Nghiem

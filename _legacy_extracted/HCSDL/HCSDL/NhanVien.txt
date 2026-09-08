@@ -1,6 +1,0 @@
-Ma, __Ten, __Ngay_Sinh, __Dia_Chi, __So_Dien_Thoai
-001, Nguyen Van Truong, 2000-07-04, TPHCM, 0990909900
-002, Nguyen Van Son, 2000-01-11, BinhThuan, 0123456789
-003, Nguyen Van Sang, 2000-10-02, HaNoi, 0987654321
-004, Tran Chi Bao, 2000-12-02, TPHCM, 0332653211
-005, Truong Tan Sang, 2000-10-02, HaNoi, 0807060504
