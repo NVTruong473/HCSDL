@@ -1,0 +1,6 @@
+MaNV, __Loai_CV
+NV01,quan li dl
+NV02,quan li ds benh nhan
+NV03,thu ngan
+NV04,quan li camera
+NV05,quan li ds nguoi nha 

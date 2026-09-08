@@ -1,0 +1,4 @@
+[Sinh vien] (Masv, hoten) (Masv: PK) – [Hoc bong] (Mabong, tenbong) (Mabong: PK): 1 – 1
+[Sinh vien] (Masv, hoten) (Masv: PK) – [Lop hoc] (MaLop, Tenlop) (Malop: PK): n – 1
+[Sinh vien] (Masv, hoten) (Masv: PK) – [Mon hoc] (Mamon, tenmon) (Mamon: PK): n – n
+[Can Bo Cong nhan vien] (Mã số, Họ tên) – [Giang vien] (Trình độ, chuyên ngành): Cha – con

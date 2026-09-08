@@ -1,0 +1,6 @@
+MaNV, __MSCC, _MaBN
+NV01 ,Nhan Khoa, BN01
+NV02 ,Nhi Khoa, BN02
+NV03 ,San Khoa, BN03
+NV04 ,San Khoa, BN04
+NV05 ,Nhan Khoa, BN05
